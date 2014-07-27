@@ -37,8 +37,8 @@ io.sockets.on('connection', function(socket){
 	console.log("usuario conectado. "+count+" usuarios ahora");
 
 	//con las 2 lineas siguientes se envia mensajes desde el servidor hacia el cliente
-	socket.emit("users", {number: count});//actualiza al usuario actual, no a todos
-	socket.broadcast.emit("users", {number: count});//envia el mensaje a todos los clientes excepto al acutal
+	socket.emit("users", {number: count});//actualiza a todos los usuarios
+	socket.broadcast.emit("users", {number: count});//actualiza a todos, excepto al que envia
 	//io.sockets.emit("users", {number: count});//esto seria el reemplazo a las 2 lineas anteriores, ya que envia a todas las sockets el mensaje
 	socket.on('disconnect', function(){
 		count--;

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="stylesheets/css.css">
+  <script type="text/javascript" src="socket.io/socket.io.js"></script>
+  <script src="javascripts/jquery-1.11.1.min.js"></script>
+</head>
+
+<body>
+
+<div class="chat-box">
+    <input type="checkbox" />
+    <label data-expanded="Close Chatbox" data-collapsed="Open Chatbox"></label>
+    <div class="chat-box-content">
+  
+  <ol class="discussion">
+    <li class="other">
+      <div class="avatar">
+        <img src="http://www.gravatar.com/avatar/847c34a7632d277869b16abdceff5bab?s=50&d=monsterid" />
+      </div>
+      <div class="messages">
+        <p>that mongodb thing looks good, huh?, why beacuse y like you</p>
+        <p>
+          tiny master db, and huge document store</p>
+      </div>
+    </li>
+    <li class="self">
+      <div class="avatar">
+        <img src="http://www.gravatar.com/avatar/329a981353e6987fe8f74883a2b60cb5?s=50&d=monsterid" />
+      </div>
+      <div class="messages">
+        <p>That makes sense.</p>
+        <p>It's a pretty small airport.</p>
+        <time datetime="2009-11-13T20:14">37 mins</time>
+      </div>
+    </li>
+    <li class="other">
+      <div class="avatar">
+        <img src="http://www.gravatar.com/avatar/847c34a7632d277869b16abdceff5bab?s=50&d=monsterid" />
+      </div>
+      <div class="messages">
+        <p>that mongodb thing looks good, huh?</p>
+        <p>
+          tiny master db, and huge document store</p>
+      </div>
+    </li>
+    <li class="self">
+      <div class="avatar">
+        <img src="http://www.gravatar.com/avatar/329a981353e6987fe8f74883a2b60cb5?s=50&d=monsterid" />
+      </div>
+      <div class="messages">
+        <p>That makes sense.</p>
+        <p>It's a pretty small airport.</p>
+        <time datetime="2009-11-13T20:14">37 mins</time>
+      </div>
+    </li>
+    <li class="other">
+      <div class="avatar">
+        <img src="http://www.gravatar.com/avatar/847c34a7632d277869b16abdceff5bab?s=50&d=monsterid" />
+      </div>
+      <div class="messages">
+        <p>that mongodb thing looks good, huh?</p>
+        <p>
+          tiny master db, and huge document store</p>
+      </div>
+    </li>
+  </ol>
+  <form id="chatForm">
+    <input id="m" autocomplete="off"/>
+    <button type="submit">Send</button>
+  </form>
+  </div>  
+</div>
+
+<script type="text/javascript">
+  var socket = io();
+  //var socket = io();
+  $( "#chatForm" ).submit(function( event ){
+    socket.emit('chat message', $('#m').val());
+    $('#m').val('')
+    event.preventDefault();
+  });
+
+  socket.on('chat message', function(msg){
+    console.log(msg);
+    $('#messages').append($('<li>').text(msg));
+  });
+</script>
+
+</body>
+</html>
